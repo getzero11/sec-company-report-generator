@@ -1,0 +1,171 @@
+{
+  "skill_name": "sec-company-report-generator",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Generate a comprehensive 10-K analysis report for Medtronic (MDT)",
+      "expected_output": "Markdown report with all sections: executive summary, business overview, risk factors, financial highlights with 4-year revenue trend, MD&A summary, financial statements, valuation, analyst estimates, recent news, clinical trials, ESG, ownership, and appendices",
+      "files": [],
+      "assertions": [
+        {
+          "name": "report_generated",
+          "description": "Report file is created and non-empty",
+          "type": "file_exists",
+          "path_pattern": "*MDT*10k*report*.md"
+        },
+        {
+          "name": "has_executive_summary",
+          "description": "Report contains executive summary section",
+          "type": "content_contains",
+          "pattern": "Executive Summary"
+        },
+        {
+          "name": "has_revenue_trend_4_years",
+          "description": "Report contains revenue trend table with at least 4 years of data",
+          "type": "content_contains",
+          "pattern": "Revenue Trend.*Last 4 Years"
+        },
+        {
+          "name": "has_yoy_changes",
+          "description": "Revenue table includes YoY percentage changes",
+          "type": "content_contains",
+          "pattern": "YoY Change"
+        },
+        {
+          "name": "has_risk_factors",
+          "description": "Report contains risk factors section with table",
+          "type": "content_contains",
+          "pattern": "Risk Factors"
+        },
+        {
+          "name": "has_mda_section",
+          "description": "Report contains MD&A section",
+          "type": "content_contains",
+          "pattern": "Management.*Discussion"
+        },
+        {
+          "name": "has_valuation_metrics",
+          "description": "Report contains valuation metrics table",
+          "type": "content_contains",
+          "pattern": "Valuation"
+        },
+        {
+          "name": "has_clinical_trials",
+          "description": "Report includes clinical trials section for healthcare company",
+          "type": "content_contains",
+          "pattern": "Clinical Trials"
+        },
+        {
+          "name": "resolves_cik_correctly",
+          "description": "Company resolution correctly identifies MDT as CIK 0001613103",
+          "type": "content_contains",
+          "pattern": "0001613103"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create a 10-K report for Apple Inc. (AAPL)",
+      "expected_output": "Markdown report with technology company focus, segment breakdown (iPhone, Mac, iPad, Wearables, Services), risk factors relevant to tech, financial trends, valuation metrics",
+      "files": [],
+      "assertions": [
+        {
+          "name": "report_generated",
+          "description": "Report file is created for AAPL",
+          "type": "file_exists",
+          "path_pattern": "*AAPL*10k*report*.md"
+        },
+        {
+          "name": "has_segments",
+          "description": "Report includes Apple's reportable segments",
+          "type": "content_contains",
+          "pattern": "Segments|iPhone|Services|Wearables"
+        },
+        {
+          "name": "has_financial_highlights",
+          "description": "Report contains financial highlights with revenue trend",
+          "type": "content_contains",
+          "pattern": "Financial Highlights"
+        },
+        {
+          "name": "no_clinical_trials",
+          "description": "Non-healthcare company should not have clinical trials section or should note N/A",
+          "type": "content_not_contains",
+          "pattern": "Clinical Trials"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Analyze Johnson & Johnson (JNJ) latest 10-K filing",
+      "expected_output": "Comprehensive report for healthcare conglomerate with pharma, medtech, consumer segments, clinical pipeline, regulatory actions",
+      "files": [],
+      "assertions": [
+        {
+          "name": "report_generated",
+          "description": "Report file is created for JNJ",
+          "type": "file_exists",
+          "path_pattern": "*JNJ*10k*report*.md"
+        },
+        {
+          "name": "has_three_segments",
+          "description": "Report identifies JNJ's three main segments",
+          "type": "content_contains",
+          "pattern": "Pharmaceutical|MedTech|Consumer"
+        },
+        {
+          "name": "has_clinical_data",
+          "description": "Report includes clinical trials for pharma segment",
+          "type": "content_contains",
+          "pattern": "Clinical Trials"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Generate SEC report for Tesla (TSLA) using CIK 0001318605",
+      "expected_output": "Report for auto/energy company with unique accounting, revenue by segment (automotive, energy), regulatory credits, risk factors",
+      "files": [],
+      "assertions": [
+        {
+          "name": "report_generated",
+          "description": "Report file is created for TSLA",
+          "type": "file_exists",
+          "path_pattern": "*TSLA*10k*report*.md"
+        },
+        {
+          "name": "cik_resolution",
+          "description": "Correctly resolves CIK 0001318605 to Tesla",
+          "type": "content_contains",
+          "pattern": "0001318605|Tesla"
+        },
+        {
+          "name": "has_auto_energy_segments",
+          "description": "Report shows automotive and energy segments",
+          "type": "content_contains",
+          "pattern": "Automotive|Energy"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Get 10-K analysis for Berkshire Hathaway (BRK.B)",
+      "expected_output": "Report for conglomerate with insurance, railroad, energy, manufacturing segments, investment portfolio details",
+      "files": [],
+      "assertions": [
+        {
+          "name": "report_generated",
+          "description": "Report file is created for BRK.B",
+          "type": "file_exists",
+          "path_pattern": "*BRK*10k*report*.md"
+        },
+        {
+          "name": "has_insurance_focus",
+          "description": "Report highlights insurance operations",
+          "type": "content_contains",
+          "pattern": "Insurance|Float"
+        }
+      ]
+    }
+  ]
+}
